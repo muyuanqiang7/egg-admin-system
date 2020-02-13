@@ -7,3 +7,10 @@ export function getList(params) {
     params
   })
 }
+
+export function getUsers() {
+  return request({
+    url: '/api/admin/user/list',
+    method: 'get'
+  })
+}

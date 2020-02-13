@@ -1,7 +1,13 @@
 <template>
   <div class="app-container">
+    <el-row>
+      <el-col>
+        <el-button @click="getUsers">查询</el-button>
+      </el-col>
+    </el-row>
     <el-table
       v-loading="listLoading"
+      style="margin-top: 10px"
       :data="list"
       element-loading-text="Loading"
       border
@@ -44,7 +50,7 @@
 </template>
 
 <script>
-import { getList } from '@/api/table'
+import { getList, getUsers } from '@/api/table'
 
 export default {
   filters: {
@@ -72,6 +78,16 @@ export default {
       getList().then(response => {
         this.list = response.data.items
         this.listLoading = false
+      })
+    },
+    getUsers() {
+      this.listLoading = true
+      getUsers().then(response => {
+        console.log(response)
+        this.listLoading = false
+      }).catch(error => {
+        this.listLoading = false
+        console.log(error)
       })
     }
   }
